@@ -1,0 +1,230 @@
+
+:root {
+    --primary: #0f172a;
+    --accent: #14b8a6;
+    --accent-light: #5eead4;
+    --text-light: #f8fafc;
+    --text-dark: #111827;
+    --card-bg: #ffffff;
+}
+
+body {
+    font-family: "Inter", Arial, sans-serif;
+    background: var(--primary);
+    margin: 0;
+    color: var(--text-light);
+}
+
+.container {
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+nav a {
+    color: var(--text-light);
+    text-decoration: none;
+    margin-right: 8px;
+    font-weight: 500;
+}
+
+nav a:hover {
+    color: var(--accent-light);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 24px;
+}
+
+.card {
+    background: var(--card-bg);
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    color: var(--text-dark);
+}
+
+.gallery img {
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+    object-fit: cover;
+    height: 300px;
+}
+
+.info {
+    padding: 18px;
+}
+
+.info h1 {
+    margin: 0 0 8px;
+    font-size: 22px;
+    color: var(--primary);
+}
+
+.meta {
+    font-size: 14px;
+    color: #475569;
+}
+
+.sidebar {
+    position: relative;
+}
+
+.priceBox {
+    background: var(--card-bg);
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    position: sticky;
+    top: 20px;
+    color: var(--text-dark);
+}
+
+.priceBox .price {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.priceBox .small {
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 15px;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+.btn.green {
+    background: var(--accent);
+    color: white;
+}
+
+.btn.green:hover {
+    background: var(--accent-light);
+}
+
+.btn.outline {
+    background: white;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+}
+
+.btn.outline:hover {
+    background: var(--accent);
+    color: white;
+}
+
+.section {
+    margin-top: 18px;
+}
+
+.section h3 {
+    margin-bottom: 8px;
+    color: var(--primary);
+}
+
+.facilities {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.chip {
+    background: #e2e8f0;
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-size: 13px;
+}
+
+.description {
+    margin-top: 20px;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #334155;
+}
+
+.rating {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 16px;
+    color: var(--primary);
+}
+
+.star {
+    color: #facc15;
+    font-size: 20px;
+}
+
+/* Rekomendasi */
+.rekomendasi {
+    margin-top: 60px;
+}
+
+.rekomendasi h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: var(--accent);
+}
+
+.swiper {
+    width: 100%;
+    padding-bottom: 30px;
+}
+
+.swiper-slide {
+    width: 260px !important;
+}
+
+.rekom-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.rekom-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.rekom-body {
+    padding: 12px 15px 18px;
+    color: var(--text-dark);
+}
+
+.rekom-body h4 {
+    margin: 6px 0;
+    color: var(--primary);
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    color: var(--accent);
+}

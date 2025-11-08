@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kost Singgahsini Muhajar 50 — Tipe B | Kebon Jeruk</title>
+
+  <!-- Swiper CSS -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+  />
+  <link rel="stylesheet" href="./css/datail_kamar.css">
+</head>
+<body>
+<div class="container">
+  <header>
+    <div class="logo">Kost Listing</div>
+    <nav><a href="#">Home</a> / <a href="#">Kost</a> / <b>Singgahsini Muhajar 50</b></nav>
+  </header>
+
+  <div class="grid">
+    <main>
+      <div class="card">
+        <div class="gallery"><img src="/assets/iain.png" alt="Foto kost"></div>
+        <div class="info">
+          <h1>Kost Singgahsini Muhajar 50 — Tipe B</h1>
+          <div class="meta">Kebon Jeruk, Jakarta Barat • Kost Putri Eksklusif</div>
+
+          <div class="section">
+            <h3>Fasilitas</h3>
+            <div class="facilities">
+              <div class="chip">AC</div>
+              <div class="chip">Kamar mandi dalam</div>
+              <div class="chip">Wi-Fi</div>
+              <div class="chip">Laundry</div>
+              <div class="chip">Dapur bersama</div>
+            </div>
+          </div>
+
+          <div class="section description">
+            <h3>Deskripsi Kamar</h3>
+            <p>Kost Singgahsini Muhajar 50 — Tipe B menawarkan kenyamanan maksimal untuk penghuni dengan fasilitas lengkap dan lokasi strategis di Kebon Jeruk, Jakarta Barat. Kamar dilengkapi dengan AC, kamar mandi dalam, serta akses Wi-Fi cepat. Lingkungan tenang dan aman, cocok untuk mahasiswa atau pekerja profesional.</p>
+          </div>
+
+          <div class="section rating">
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star" style="color:#d1d5db;">★</span>
+            <span>4.0 / 5 dari 23 ulasan</span>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <aside class="sidebar">
+      <div class="priceBox">
+        <div style="font-size:13px;color:var(--accent);font-weight:600">Diskon 10%</div>
+        <div class="price">Rp 1.500.000 <span class="small">/bulan</span></div>
+        <button class="btn outline">Tanya Pemilik</button>
+        <button class="btn green">Ajukan Sewa</button>
+      </div>
+    </aside>
+  </div>
+
+  <!-- 🟩 Bagian Rekomendasi Kamar -->
+  <section class="rekomendasi">
+    <h2>Rekomendasi Kamar Lainnya</h2>
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="rekom-card">
+            <img src="/images/item15.png" alt="Kamar Ramah Kantong">
+            <div class="rekom-body">
+              <h4>Kamar Ramah Kantong</h4>
+              <p>Nyaman dengan kamar mandi dalam</p>
+              <small>Rp 1.000.000 /bulan</small>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="rekom-card">
+            <img src="/images/item16.png" alt="Kamar Premium">
+            <div class="rekom-body">
+              <h4>Kamar Premium</h4>
+              <p>Full furnished + Wi-Fi cepat</p>
+              <small>Rp 2.000.000 /bulan</small>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="rekom-card">
+            <img src="/images/item17.png" alt="Kamar Minimalis">
+            <div class="rekom-body">
+              <h4>Kamar Minimalis</h4>
+              <p>Desain modern, lokasi strategis</p>
+              <small>Rp 1.700.000 /bulan</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- tombol navigasi -->
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    </div>
+  </section>
+</div>
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  const swiper = new Swiper(".swiper", {
+    slidesPerView: 3,
+    spaceBetween: 20,
+    loop: true,
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    autoplay: {
+      delay: 2500,
+      disableOnInteraction: false,
+    },
+    breakpoints: {
+      0: { slidesPerView: 1 },
+      768: { slidesPerView: 2 },
+      1024: { slidesPerView: 3 },
+    },
+  });
+</script>
+</body>
+</html>
