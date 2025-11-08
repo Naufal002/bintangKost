@@ -1,11 +1,366 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detail Kamar</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kost Singgahsini Muhajar 50 — Tipe B | Kebon Jeruk</title>
+
+  <!-- Swiper CSS -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+  />
+
+  <style>
+    :root {
+      --primary: #0f172a;
+      --accent: #14b8a6;
+      --accent-light: #5eead4;
+      --text-light: #f8fafc;
+      --text-dark: #111827;
+      --card-bg: #ffffff;
+    }
+
+    body {
+      font-family: "Inter", Arial, sans-serif;
+      background: var(--primary);
+      margin: 0;
+      color: var(--text-light);
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    nav a {
+      color: var(--text-light);
+      text-decoration: none;
+      margin-right: 8px;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: var(--accent-light);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 24px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      color: var(--text-dark);
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 10px 10px 0 0;
+      object-fit: cover;
+      height: 300px;
+    }
+
+    .info {
+      padding: 18px;
+    }
+
+    .info h1 {
+      margin: 0 0 8px;
+      font-size: 22px;
+      color: var(--primary);
+    }
+
+    .meta {
+      font-size: 14px;
+      color: #475569;
+    }
+
+    .sidebar {
+      position: relative;
+    }
+
+    .priceBox {
+      background: var(--card-bg);
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      padding: 20px;
+      position: sticky;
+      top: 20px;
+      color: var(--text-dark);
+    }
+
+    .priceBox .price {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .priceBox .small {
+      font-size: 13px;
+      color: #6b7280;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 15px;
+      margin-top: 10px;
+      transition: 0.3s;
+    }
+
+    .btn.green {
+      background: var(--accent);
+      color: white;
+    }
+
+    .btn.green:hover {
+      background: var(--accent-light);
+    }
+
+    .btn.outline {
+      background: white;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+    }
+
+    .btn.outline:hover {
+      background: var(--accent);
+      color: white;
+    }
+
+    .section {
+      margin-top: 18px;
+    }
+
+    .section h3 {
+      margin-bottom: 8px;
+      color: var(--primary);
+    }
+
+    .facilities {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .chip {
+      background: #e2e8f0;
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-size: 13px;
+    }
+
+    .description {
+      margin-top: 20px;
+      font-size: 15px;
+      line-height: 1.6;
+      color: #334155;
+    }
+
+    .rating {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 16px;
+      color: var(--primary);
+    }
+
+    .star {
+      color: #facc15;
+      font-size: 20px;
+    }
+
+    /* Rekomendasi */
+    .rekomendasi {
+      margin-top: 60px;
+    }
+
+    .rekomendasi h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: var(--accent);
+    }
+
+    .swiper {
+      width: 100%;
+      padding-bottom: 30px;
+    }
+
+    .swiper-slide {
+      width: 260px !important;
+    }
+
+    .rekom-card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+    }
+
+    .rekom-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .rekom-body {
+      padding: 12px 15px 18px;
+      color: var(--text-dark);
+    }
+
+    .rekom-body h4 {
+      margin: 6px 0;
+      color: var(--primary);
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+      color: var(--accent);
+    }
+  </style>
 </head>
 <body>
-    
+<div class="container">
+  <header>
+    <div class="logo">Kost Listing</div>
+    <nav><a href="#">Home</a> / <a href="#">Kost</a> / <b>Singgahsini Muhajar 50</b></nav>
+  </header>
+
+  <div class="grid">
+    <main>
+      <div class="card">
+        <div class="gallery"><img src="./assets/iain.png" alt="Foto kost"></div>
+        <div class="info">
+          <h1>Kost Singgahsini Muhajar 50 — Tipe B</h1>
+          <div class="meta">Kebon Jeruk, Jakarta Barat • Kost Putri Eksklusif</div>
+
+          <div class="section">
+            <h3>Fasilitas</h3>
+            <div class="facilities">
+              <div class="chip">AC</div>
+              <div class="chip">Kamar mandi dalam</div>
+              <div class="chip">Wi-Fi</div>
+              <div class="chip">Laundry</div>
+              <div class="chip">Dapur bersama</div>
+            </div>
+          </div>
+
+          <div class="section description">
+            <h3>Deskripsi Kamar</h3>
+            <p>Kost Singgahsini Muhajar 50 — Tipe B menawarkan kenyamanan maksimal untuk penghuni dengan fasilitas lengkap dan lokasi strategis di Kebon Jeruk, Jakarta Barat. Kamar dilengkapi dengan AC, kamar mandi dalam, serta akses Wi-Fi cepat. Lingkungan tenang dan aman, cocok untuk mahasiswa atau pekerja profesional.</p>
+          </div>
+
+          <div class="section rating">
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star" style="color:#d1d5db;">★</span>
+            <span>4.0 / 5 dari 23 ulasan</span>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <aside class="sidebar">
+      <div class="priceBox">
+        <div style="font-size:13px;color:var(--accent);font-weight:600">Diskon 10%</div>
+        <div class="price">Rp 1.500.000 <span class="small">/bulan</span></div>
+        <button class="btn outline">Tanya Pemilik</button>
+        <button class="btn green">Ajukan Sewa</button>
+      </div>
+    </aside>
+  </div>
+
+  <!-- 🟩 Bagian Rekomendasi Kamar -->
+  <section class="rekomendasi">
+    <h2>Rekomendasi Kamar Lainnya</h2>
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="rekom-card">
+            <img src="images/item15.png" alt="Kamar Ramah Kantong">
+            <div class="rekom-body">
+              <h4>Kamar Ramah Kantong</h4>
+              <p>Nyaman dengan kamar mandi dalam</p>
+              <small>Rp 1.000.000 /bulan</small>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="rekom-card">
+            <img src="images/item16.png" alt="Kamar Premium">
+            <div class="rekom-body">
+              <h4>Kamar Premium</h4>
+              <p>Full furnished + Wi-Fi cepat</p>
+              <small>Rp 2.000.000 /bulan</small>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="rekom-card">
+            <img src="images/item17.png" alt="Kamar Minimalis">
+            <div class="rekom-body">
+              <h4>Kamar Minimalis</h4>
+              <p>Desain modern, lokasi strategis</p>
+              <small>Rp 1.700.000 /bulan</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- tombol navigasi -->
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    </div>
+  </section>
+</div>
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  const swiper = new Swiper(".swiper", {
+    slidesPerView: 3,
+    spaceBetween: 20,
+    loop: true,
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    autoplay: {
+      delay: 2500,
+      disableOnInteraction: false,
+    },
+    breakpoints: {
+      0: { slidesPerView: 1 },
+      768: { slidesPerView: 2 },
+      1024: { slidesPerView: 3 },
+    },
+  });
+</script>
 </body>
 </html>
