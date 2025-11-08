@@ -26,8 +26,8 @@ if (mysqli_num_rows($result) > 0) {
     } elseif ($data['username'] == 'admin') {
         header("Location: ../dashboard-admin.html");
         exit();
-    } else {
-        echo "<script>alert('Role tidak dikenali'); window.location='index.html';</script>";
+    } else { 
+        echo "<script>alert('Role tidak dikenali'); window.location='../index.html';</script>";
     }
 } else {
     echo "<script>alert('Username atau Password salah!'); window.location='../index.html';</script>";
