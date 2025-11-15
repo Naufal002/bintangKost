@@ -14,17 +14,45 @@
 </head>
 <body>
 <div class="container">
+
+
   <header>
     <div class="logo">Kost Listing</div>
     <nav><a href="#">Home</a> / <a href="#">Kost</a> / <b>Singgahsini Muhajar 50</b></nav>
   </header>
 
+  <?php
+include '../proses/koneksi.php';
+
+// 1. CEK apakah ada parameter id
+if (!isset($_GET['id'])) {
+    echo "Kamar tidak ditemukan!";
+    exit;
+}
+
+$id = $_GET['id'];
+
+// 2. AMBIL DATA KAMAR BERDASARKAN ID
+$query = mysqli_query($koneksi, "SELECT * FROM data_kamar WHERE id_kamar = '$id'");
+$kamar = mysqli_fetch_assoc($query);
+
+// 3. CEK DATA KETEMU ATAU NGGA
+if (!$kamar) {
+    echo "Data kamar tidak ditemukan!";
+    exit;
+}
+?>
+
+
   <div class="grid">
     <main>
       <div class="card">
-        <div class="gallery"><img src="../images/kos4 .jpg" alt="Foto kost"></div>
+         <img src="../images/<?php echo $kamar['gambar']; ?>" 
+             style="width:100%; height:auto;" 
+             alt="<?php echo $kamar['nama_kamar']; ?>">
+             
         <div class="info">
-          <h1>Kost Singgahsini Muhajar 50 — Tipe B</h1>
+          <h1><?php echo $kamar['nama_kamar']; ?></h1>
           <div class="meta">Kebon Jeruk, Jakarta Barat • Kost Putri Eksklusif</div>
 
           <div class="section">
@@ -40,7 +68,7 @@
 
           <div class="section description">
             <h3>Deskripsi Kamar</h3>
-            <p>Kost Singgahsini Muhajar 50 — Tipe B menawarkan kenyamanan maksimal untuk penghuni dengan fasilitas lengkap dan lokasi strategis di Kebon Jeruk, Jakarta Barat. Kamar dilengkapi dengan AC, kamar mandi dalam, serta akses Wi-Fi cepat. Lingkungan tenang dan aman, cocok untuk mahasiswa atau pekerja profesional.</p>
+            <p><?php echo $kamar['deskripsi']; ?></p>
           </div>
 
           <div class="section rating">
@@ -58,7 +86,11 @@
     <aside class="sidebar">
       <div class="priceBox">
         <div style="font-size:13px;color:var(--accent);font-weight:600">Diskon 10%</div>
-        <div class="price">Rp 1.500.000 <span class="small">/bulan</span></div>
+        <div class="price">
+          Rp <?php echo number_format($kamar['harga']); ?>.000
+          <span class="small">/bulan</span>
+        </div>
+
         <button class="btn outline">Tanya Pemilik</button>
         <button class="btn green">Ajukan Sewa</button>
       </div>

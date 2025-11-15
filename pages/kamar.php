@@ -279,102 +279,68 @@
 
 
 
-  <!-- Residence start  -->
+  <!-- Kamar - kamar  -->
   <section id="residence">
-<div class="container  my-5 py-5">
-  <div class="swiper-button-next residence-swiper-next  residence-arrow"></div>
-  <div class="swiper-button-prev residence-swiper-prev residence-arrow"></div>
-  <div class="swiper residence-swiper">
-    <h2 class="text-capitalize m-0 py-lg-3">Semua kamar</h2>
-    <div class="swiper-wrapper">
-      <div class="swiper-slide">
-        <div class="card">
-          <a href="index.html"><img src="../images/item15.png" class="card-img-top" alt="image"></a>
-          <div class="card-body p-0">
-            <a href="index.html">
-              <h5 class="card-title pt-4">Kamar-Ramah kantong</h5>
-            </a>
-            <p class="card-text">Nyaman dengan kamar mandi dalam</p>
-            <div class="card-text">
-              <ul class="d-flex">
-                <li class="residence-list"> <img src="../images/bed.png" alt="image"> 1 Kasur</li>
-                <li class="residence-list"> <img src="../images/bath.png" alt="image"> 1 Bath</li>
-                <li class="residence-list"> <img src="../images/square.png" alt="image"> 3x4m</li>
-              </ul>
-              <button class="btn btn-primary btn-lg px-40 me-md-2" style="width: 19rem;">pesan</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="swiper-slide">
-        <div class="card">
-          <a href="index.html"><img src="../images/item16.png" class="card-img-top" alt="image"></a>
-          <div class="card-body p-0">
-            <a href="index.html">
-              <h5 class="card-title pt-4">Kamar-Gedhe</h5>
-            </a>
-            <p class="card-text">Cocok untuk share dengan teman</p>
-            <div class="card-text">
-              <ul class="d-flex">
-                <li class="residence-list"> <img src="../images/bed.png" alt="image"> 2 Kasur</li>
-                <li class="residence-list"> <img src="../images/bath.png" alt="image"> 1 Bath</li>
-                <li class="residence-list"> <img src="../images/square.png" alt="image"> 5x8m</li>
-              </ul>
-              <button class="btn btn-primary btn-lg px-40 me-md-2" style="width: 19rem;">pesan</button>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="container my-5 py-5">
+        
+        <h2 class="text-capitalize m-0 py-lg-3 text-center mb-4">Semua kamar</h2>
+
+        <div class="row g-4">
+
+            <?php 
+            // Cukup panggil koneksi & query satu kali di sini
+            include '../proses/koneksi.php';
+            
+            // Pastikan koneksi berhasil sebelum query
+            if ($koneksi) {
+                $query = mysqli_query($koneksi, "SELECT * FROM data_kamar");
+
+                // Lakukan looping selama datanya ada
+                while ($kamar = mysqli_fetch_assoc($query)) { 
+            ?>
+            
+                <div class="col-lg-4 col-md-6 mb-4">
+                    
+                    <div class="card h-100 shadow-sm"> 
+                        <a href="detail_kamar.php?id=<?php echo $kamar['id_kamar']; ?>">
+                            <img 
+                                src="../images/<?php echo $kamar['gambar']; ?>" 
+                                class="card-img-top" 
+                                style="height: 200px; object-fit: cover;">
+                        </a>
+
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">
+                                <?php echo $kamar['nama_kamar']; ?>
+                            </h5>
+                            <p class="card-text text-muted">
+                                <?php echo $kamar['deskripsi']; ?>
+                            </p>
+
+                            <ul class="list-unstyled">
+                                <li>🛏️ <?php echo $kamar['fasilitas']; ?></li>
+                                <li>📌 Kategori: <?php echo $kamar['kategori']; ?></li>
+                                <li>✔️ Status: <?php echo $kamar['ketersediaan']; ?></li>
+                            </ul>
+
+                            <a 
+                                href="detail_kamar.php?id=<?php echo $kamar['id_kamar']; ?>" 
+                                class="btn btn-primary w-100 mt-auto"> 
+                                Pesan
+                            </a>
+                        </div>
+                    </div>
+                </div> <?php 
+                } // Penutup while loop
+            } else {
+                echo "<p>Koneksi ke database gagal.</p>";
+            }
+            ?>
+
+        </div> </div> </section>
 
 
-      <div class="card">
-  <a href="index.html"><img src="../images/item16.png" class="card-img-top" alt="image"></a>
-  <div class="card-body p-0">
-    <a href="index.html">
-      <h5 class="card-title pt-4">Kamar-Gedhe</h5>
-    </a>
-    <p class="card-text">Cocok untuk share dengan teman</p>
-    <div class="card-text">
-      <ul class="d-flex">
-        <li class="residence-list"> <img src="../images/bed.png" alt="image"> 2 Kasur</li>
-        <li class="residence-list"> <img src="../images/bath.png" alt="image"> 1 Bath</li>
-        <li class="residence-list"> <img src="../images/square.png" alt="image"> 5x8m</li>
-      </ul>
-      <button class="btn btn-primary btn-lg px-40 me-md-2" style="width: 19rem;">pesan</button>
-    </div>
-  </div>
-      </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-            <div class="container  my-5 py-5">
-  <div class="swiper-button-next residence-swiper-next  residence-arrow"></div>
-  <div class="swiper-button-prev residence-swiper-prev residence-arrow"></div>
-  <div class="swiper residence-swiper">
-    <div class="swiper-wrapper">
-      <div class="swiper-slide">
-        <div class="card">
-          <a href="index.html"><img src="../images/item15.png" class="card-img-top" alt="image"></a>
-          <div class="card-body p-0">
-            <a href="index.html">
-              <h5 class="card-title pt-4">Kamar-Ramah kantong</h5>
-            </a>
-            <p class="card-text">Nyaman dengan kamar mandi dalam</p>
-            <div class="card-text">
-              <ul class="d-flex">
-                <li class="residence-list"> <img src="../images/bed.png" alt="image"> 1 Kasur</li>
-                <li class="residence-list"> <img src="../images/bath.png" alt="image"> 1 Bath</li>
-                <li class="residence-list"> <img src="../images/square.png" alt="image"> 3x4m</li>
-              </ul>
-              <button class="btn btn-primary btn-lg px-40 me-md-2" style="width: 19rem;">pesan</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="swiper-slide">
+      <!-- <div class="swiper-slide">
         <div class="card">
           <a href="index.html"><img src="../images/item16.png" class="card-img-top" alt="image"></a>
           <div class="card-body p-0">
@@ -386,16 +352,19 @@
               <ul class="d-flex">
                 <li class="residence-list"> <img src="../images/bed.png" alt="image"> 2 Kasur</li>
                 <li class="residence-list"> <img src="../images/bath.png" alt="image"> 1 Bath</li>
-                <li class="residence-list"> <img src="../images/square.png" alt="image"> 5x8m</li>
+                <li class="residence-list"> <button class="btn btn-primary btn-lg px-30 me-md-2" style="border-radius: 200px; height: 35px; "><p style="font-size: medium;">sedia</p></button></li>
               </ul>
               <button class="btn btn-primary btn-lg px-40 me-md-2" style="width: 19rem;">pesan</button>
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
 
 
-      <div class="card">
+
+
+
+      <!-- <div class="card">
   <a href="index.html"><img src="../images/item16.png" class="card-img-top" alt="image"></a>
   <div class="card-body p-0">
     <a href="index.html">
@@ -406,7 +375,7 @@
       <ul class="d-flex">
         <li class="residence-list"> <img src="../images/bed.png" alt="image"> 2 Kasur</li>
         <li class="residence-list"> <img src="../images/bath.png" alt="image"> 1 Bath</li>
-        <li class="residence-list"> <img src="../images/square.png" alt="image"> 5x8m</li>
+        <li class="residence-list"> <button class="btn btn-primary btn-lg px-30 me-md-2" style="border-radius: 200px; height: 35px; "><p style="font-size: medium;">sedia</p></button></li>
       </ul>
       <button class="btn btn-primary btn-lg px-40 me-md-2" style="width: 19rem;">pesan</button>
     </div>
@@ -415,9 +384,10 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
-                      <div class="container  my-5 py-5">
+
+            <!-- <div class="container  my-5 py-5">
   <div class="swiper-button-next residence-swiper-next  residence-arrow"></div>
   <div class="swiper-button-prev residence-swiper-prev residence-arrow"></div>
   <div class="swiper residence-swiper">
@@ -434,14 +404,16 @@
               <ul class="d-flex">
                 <li class="residence-list"> <img src="../images/bed.png" alt="image"> 1 Kasur</li>
                 <li class="residence-list"> <img src="../images/bath.png" alt="image"> 1 Bath</li>
-                <li class="residence-list"> <img src="../images/square.png" alt="image"> 3x4m</li>
+                <li class="residence-list"> <button class="btn btn-dark btn-lg px-30 me-md-2" style="border-radius: 200px; height: 35px; "><p style="font-size: medium;">Terisi</p></button></li>
               </ul>
               <button class="btn btn-primary btn-lg px-40 me-md-2" style="width: 19rem;">pesan</button>
             </div>
           </div>
         </div>
-      </div>
-      <div class="swiper-slide">
+      </div> -->
+
+
+      <!-- <div class="swiper-slide">
         <div class="card">
           <a href="index.html"><img src="../images/item16.png" class="card-img-top" alt="image"></a>
           <div class="card-body p-0">
@@ -453,16 +425,18 @@
               <ul class="d-flex">
                 <li class="residence-list"> <img src="../images/bed.png" alt="image"> 2 Kasur</li>
                 <li class="residence-list"> <img src="../images/bath.png" alt="image"> 1 Bath</li>
-                <li class="residence-list"> <img src="../images/square.png" alt="image"> 5x8m</li>
+                <li class="residence-list"> <button class="btn btn-dark btn-lg px-30 me-md-2" style="border-radius: 200px; height: 35px; "><p style="font-size: medium;">Terisi</p></button></li>
               </ul>
               <button class="btn btn-primary btn-lg px-40 me-md-2" style="width: 19rem;">pesan</button>
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
 
 
-      <div class="card">
+
+
+      <!-- <div class="card">
   <a href="index.html"><img src="../images/item16.png" class="card-img-top" alt="image"></a>
   <div class="card-body p-0">
     <a href="index.html">
@@ -473,21 +447,21 @@
       <ul class="d-flex">
         <li class="residence-list"> <img src="../images/bed.png" alt="image"> 2 Kasur</li>
         <li class="residence-list"> <img src="../images/bath.png" alt="image"> 1 Bath</li>
-        <li class="residence-list"> <img src="../images/square.png" alt="image"> 5x8m</li>
+        <li class="residence-list"> <button class="btn btn-primary btn-lg px-30 me-md-2" style="border-radius: 200px; height: 35px; "><p style="font-size: medium;">sedia</p></button></li>
       </ul>
-      <button class="btn btn-primary btn-lg px-40 me-md-2" style="width: 19rem;">pesan</button>
+      <a href="detail_kamar.html" class="btn btn-primary btn-lg px-40 me-md-2" style="width: 19rem;">pesan</a>
     </div>
   </div>
       </div>
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 
 
 
-<div class="container  my-5 py-5">
+                      <!-- <div class="container  my-5 py-5">
   <div class="swiper-button-next residence-swiper-next  residence-arrow"></div>
   <div class="swiper-button-prev residence-swiper-prev residence-arrow"></div>
   <div class="swiper residence-swiper">
@@ -504,14 +478,16 @@
               <ul class="d-flex">
                 <li class="residence-list"> <img src="../images/bed.png" alt="image"> 1 Kasur</li>
                 <li class="residence-list"> <img src="../images/bath.png" alt="image"> 1 Bath</li>
-                <li class="residence-list"> <img src="../images/square.png" alt="image"> 3x4m</li>
+                <li class="residence-list"> <button class="btn btn-primary btn-lg px-30 me-md-2" style="border-radius: 200px; height: 35px; "><p style="font-size: medium;">sedia</p></button></li>
               </ul>
               <button class="btn btn-primary btn-lg px-40 me-md-2" style="width: 19rem;">pesan</button>
             </div>
           </div>
         </div>
-      </div>
-      <div class="swiper-slide">
+      </div> -->
+
+
+      <!-- <div class="swiper-slide">
         <div class="card">
           <a href="index.html"><img src="../images/item16.png" class="card-img-top" alt="image"></a>
           <div class="card-body p-0">
@@ -523,16 +499,16 @@
               <ul class="d-flex">
                 <li class="residence-list"> <img src="../images/bed.png" alt="image"> 2 Kasur</li>
                 <li class="residence-list"> <img src="../images/bath.png" alt="image"> 1 Bath</li>
-                <li class="residence-list"> <img src="../images/square.png" alt="image"> 5x8m</li>
+                <li class="residence-list"> <button class="btn btn-primary btn-lg px-30 me-md-2" style="border-radius: 200px; height: 35px; "><p style="font-size: medium;">sedia</p></button></li>
               </ul>
               <button class="btn btn-primary btn-lg px-40 me-md-2" style="width: 19rem;">pesan</button>
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
 
 
-      <div class="card">
+      <!-- <div class="card">
   <a href="index.html"><img src="../images/item16.png" class="card-img-top" alt="image"></a>
   <div class="card-body p-0">
     <a href="index.html">
@@ -543,7 +519,7 @@
       <ul class="d-flex">
         <li class="residence-list"> <img src="../images/bed.png" alt="image"> 2 Kasur</li>
         <li class="residence-list"> <img src="../images/bath.png" alt="image"> 1 Bath</li>
-        <li class="residence-list"> <img src="../images/square.png" alt="image"> 5x8m</li>
+        <li class="residence-list"> <button class="btn btn-primary btn-lg px-30 me-md-2" style="border-radius: 200px; height: 35px; "><p style="font-size: medium;">sedia</p></button></li>
       </ul>
       <button class="btn btn-primary btn-lg px-40 me-md-2" style="width: 19rem;">pesan</button>
     </div>
@@ -552,10 +528,12 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 
-            <div class="container  my-5 py-5">
+
+
+<!-- <div class="container  my-5 py-5">
   <div class="swiper-button-next residence-swiper-next  residence-arrow"></div>
   <div class="swiper-button-prev residence-swiper-prev residence-arrow"></div>
   <div class="swiper residence-swiper">
@@ -572,14 +550,16 @@
               <ul class="d-flex">
                 <li class="residence-list"> <img src="../images/bed.png" alt="image"> 1 Kasur</li>
                 <li class="residence-list"> <img src="../images/bath.png" alt="image"> 1 Bath</li>
-                <li class="residence-list"> <img src="../images/square.png" alt="image"> 3x4m</li>
+                <li class="residence-list"> <button class="btn btn-primary btn-lg px-30 me-md-2" style="border-radius: 200px; height: 35px; "><p style="font-size: medium;">sedia</p></button></li>
               </ul>
               <button class="btn btn-primary btn-lg px-40 me-md-2" style="width: 19rem;">pesan</button>
             </div>
           </div>
         </div>
-      </div>
-      <div class="swiper-slide">
+      </div> -->
+
+
+      <!-- <div class="swiper-slide">
         <div class="card">
           <a href="index.html"><img src="../images/item16.png" class="card-img-top" alt="image"></a>
           <div class="card-body p-0">
@@ -591,16 +571,16 @@
               <ul class="d-flex">
                 <li class="residence-list"> <img src="../images/bed.png" alt="image"> 2 Kasur</li>
                 <li class="residence-list"> <img src="../images/bath.png" alt="image"> 1 Bath</li>
-                <li class="residence-list"> <img src="../images/square.png" alt="image"> 5x8m</li>
+                <li class="residence-list"> <button class="btn btn-primary btn-lg px-30 me-md-2" style="border-radius: 200px; height: 35px; "><p style="font-size: medium;">sedia</p></button></li>
               </ul>
               <button class="btn btn-primary btn-lg px-40 me-md-2" style="width: 19rem;">pesan</button>
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
 
 
-      <div class="card">
+      <!-- <div class="card">
   <a href="index.html"><img src="../images/item16.png" class="card-img-top" alt="image"></a>
   <div class="card-body p-0">
     <a href="index.html">
@@ -611,7 +591,7 @@
       <ul class="d-flex">
         <li class="residence-list"> <img src="../images/bed.png" alt="image"> 2 Kasur</li>
         <li class="residence-list"> <img src="../images/bath.png" alt="image"> 1 Bath</li>
-        <li class="residence-list"> <img src="../images/square.png" alt="image"> 5x8m</li>
+        <li class="residence-list"> <button class="btn btn-primary btn-lg px-30 me-md-2" style="border-radius: 200px; height: 35px; "><p style="font-size: medium;">sedia</p></button></li>
       </ul>
       <button class="btn btn-primary btn-lg px-40 me-md-2" style="width: 19rem;">pesan</button>
     </div>
@@ -620,10 +600,85 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 
-  </section>
+            <!-- <div class="container  my-5 py-5">
+  <div class="swiper-button-next residence-swiper-next  residence-arrow"></div>
+  <div class="swiper-button-prev residence-swiper-prev residence-arrow"></div>
+  <div class="swiper residence-swiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <div class="card">
+          <a href="index.html"><img src="../images/item15.png" class="card-img-top" alt="image"></a>
+          <div class="card-body p-0">
+            <a href="index.html">
+              <h5 class="card-title pt-4">Kamar-Ramah kantong</h5>
+            </a>
+            <p class="card-text">Nyaman dengan kamar mandi dalam</p>
+            <div class="card-text">
+              <ul class="d-flex">
+                <li class="residence-list"> <img src="../images/bed.png" alt="image"> 1 Kasur</li>
+                <li class="residence-list"> <img src="../images/bath.png" alt="image"> 1 Bath</li>
+                <li class="residence-list"> <button class="btn btn-primary btn-lg px-30 me-md-2" style="border-radius: 200px; height: 35px; "><p style="font-size: medium;">sedia</p></button></li>
+              </ul>
+              <button class="btn btn-primary btn-lg px-40 me-md-2" style="width: 19rem;">pesan</button>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- <div class="swiper-slide">
+        <div class="card">
+          <a href="index.html"><img src="../images/item16.png" class="card-img-top" alt="image"></a>
+          <div class="card-body p-0">
+            <a href="index.html">
+              <h5 class="card-title pt-4">Kamar-Gedhe</h5>
+            </a>
+            <p class="card-text">Cocok untuk share dengan teman</p>
+            <div class="card-text">
+              <ul class="d-flex">
+                <li class="residence-list"> <img src="../images/bed.png" alt="image"> 2 Kasur</li>
+                <li class="residence-list"> <img src="../images/bath.png" alt="image"> 1 Bath</li>
+                <li class="residence-list"> <button class="btn btn-primary btn-lg px-30 me-md-2" style="border-radius: 200px; height: 35px; "><p style="font-size: medium;">sedia</p></button></li>
+              </ul>
+              <button class="btn btn-primary btn-lg px-40 me-md-2" style="width: 19rem;">pesan</button>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+
+      <!-- <div class="card">
+  <a href="index.html"><img src="../images/item16.png" class="card-img-top" alt="image"></a>
+  <div class="card-body p-0">
+    <a href="index.html">
+      <h5 class="card-title pt-4">Kamar-Gedhe</h5>
+    </a>
+    <p class="card-text">Cocok untuk share dengan teman</p>
+    <div class="card-text">
+      <ul class="d-flex">
+        <li class="residence-list"> <img src="../images/bed.png" alt="image"> 2 Kasur</li>
+        <li class="residence-list"> <img src="../images/bath.png" alt="image"> 1 Bath</li>
+        <li class="residence-list"> <button class="btn btn-primary btn-lg px-30 me-md-2" style="border-radius: 200px; height: 35px; "><p style="font-size: medium;">sedia</p></button></li>
+      </ul>
+      <button class="btn btn-primary btn-lg px-40 me-md-2" style="width: 19rem;">pesan</button>
+    </div>
+  </div>
+      </div>. -->
+
+      <!-- </div>
+    </div>
+  </div>
+</div> -->
+
+
+  <!-- </section> -->
+
+  
+
+
+
   
   <!-- Lets start  -->
   <section id="start">

@@ -9,21 +9,27 @@
 <body>
   <div class="wrapper">
     <h2>Tambah data kamar</h2>
-    <form action="#">
+    <form action="../proses/proses_tambahdatakamar.php" method="POST">
       <div class="input-box">
-        <input type="text" placeholder="Nama kamar" required>
+        <input type="text" placeholder="Nama kamar" name="nama_kamar" required>
       </div>
       <div class="input-box">
-        <input type="text" placeholder="kategori" required>
+        <input type="text" placeholder="kategori" name="kategori" required>
       </div>
       <div class="input-box">
-        <input type="password" placeholder="deskripsi" required>
+        <textarea placeholder="deskripsi" name="deskripsi" required></textarea>
       </div>
       <div class="input-box">
-        <input type="password" placeholder="fasilitas" required>
+        <textarea type="text" placeholder="fasilitas" name="fasilitas" required></textarea>
       </div>
       <div class="input-box">
-        <input type="file" placeholder="gambar" required>
+        <input type="number" placeholder="harga" name="harga" required>
+      </div>
+      <div class="input-box">
+        <input type="file" placeholder="gambar" name="gambar" required>
+    </div>
+    <div class="input-box">
+        <input type="text" placeholder="ketersediaan" name="ketersediaan" required>
     </div>
       <div class="policy">
         <input type="checkbox">

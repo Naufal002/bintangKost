@@ -31,31 +31,32 @@
     <div id="wrapper">
 
        <!-- Sidebar -->
-                    <ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark accordion" id="accordionSidebar">
+                    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
                         <!-- Sidebar - Brand -->
                         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
                             <div class="sidebar-brand-icon rotate-n-15">
                                 <i class="fas fa-bookmark"></i>
                             </div>
-                        <div class="sidebar-brand-text mx-3">Admin <sup>BintangKost</sup></div>
+                        <div class="sidebar-brand-text mx-3">penyewa <sup>BintangKost</sup></div>
                         </a>
     <!-- Divider -->
                     <hr class="sidebar-divider my-0">
     <!-- Nav Item - Dashboard -->
                     <li class="nav-item active">
-                            <a class="nav-link" href="dashboard-admin.html">
+                            <a class="nav-link" href="kamar.html
+                            ">
                                 <i class="fas fa-fw fa-tachometer-alt"></i>
-                            <span>Dashboard</span></a>
+                            <span>List kamar</span></a>
                     </li>
                     <li class="nav-item active">
-                            <a class="nav-link" href="data_kamar.html">
-                                <i class="fas fa-fw fa-hotel"></i>
-                            <span>Data kamar</span></a>
+                            <a class="nav-link" href="pesanan.html">
+                                <i class="fas fa-fw fa-search"></i>
+                            <span>pesanan</span></a>
                     </li>
                     <li class="nav-item active">
-                            <a class="nav-link" href="data_pesanan.html">
-                                <i class="fas fa-fw fa-book-reader"></i>
-                            <span>Data Pesanan</span></a>
+                            <a class="nav-link" href="keluhan.html">
+                                <i class="fas fa-fw fa-comments"></i>
+                            <span>keluhan</span></a>
                     </li>
     <!-- Divider -->
     <hr class="sidebar-divider">
@@ -279,13 +280,14 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h2 mb-2 text-gray-800">Data pemesanan kost</h1>
-                    <p class="mb-4">Data pesanan yang ada di bintang kost saat ini.</p>
+                    <h1 class="h2 mb-2 text-gray-800">Data kamar kost</h1>
+                    <p class="mb-4">Data kamar yang ada di bintang kost saat ini.</p>
+                    
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-danger">Data pesanan kost</h6>
+                            <h6 class="m-0 font-weight-bold text-danger"><a href="tambah_datakamar.html" class="btn btn-dark" style="margin-right: 2rem;">+ tambah kamar</a> </h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -293,7 +295,6 @@
                                     <thead>
                                         <tr>
                                             <th>Nama Kamar</th>
-                                            <th>Penyewa</th>
                                             <th>kategori</th>
                                             <th>deskripsi</th>
                                             <th>fasilitas</th>
@@ -306,7 +307,6 @@
                                     <tfoot>
                                         <tr>
                                             <th>Nama Kamar</th>
-                                            <th>Penyewa</th>
                                             <th>kategori</th>
                                             <th>deskripsi</th>
                                             <th>fasilitas</th>
@@ -319,14 +319,13 @@
                                     <tbody>
                                         <tr>
                                             <td>Kamar 01</td>
-                                            <td>Adhipura</td>
                                             <td>350k-400k</td>
                                             <td>kost hemat cocok buat anda yang ingin hemat xixi</td>
                                             <td>kasur,lemari,meja,kamar-mandi luar</td>
                                             <td>400k</td>
                                             <td></td>
                                             <td>Sedia</td>
-                                            <td><button class="btn btn-outline-danger"> meminta ACC</button> | <button class="btn btn-outline-dark"> Tolak ACC</button></td>
+                                            <td><button class="btn btn-outline-danger"> menunggu ACC</button> | <button class="btn btn-outline-dark"> Batalkan pesanan</button></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -383,7 +382,7 @@
 
     <!-- Bootstrap core JavaScript-->
     <script src="../vendor/jquery/jquery.min.js"></script>
-    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
     <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>

@@ -61,6 +61,39 @@ form .input-box input{
 .input-box input:valid{
   border-color: #e74a3b;
 }
+
+
+
+
+
+
+form .input-box textarea{
+  height: 100%;
+  width: 100%;
+  outline: none;
+  padding: 0 15px;
+  font-size: 17px;
+  font-weight: 400;
+  color: #333;
+  border: 1.5px solid #C7BEBE;
+  border-bottom-width: 2.5px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+.input-box textarea:focus,
+.input-box textarea:valid{
+  border-color: #e74a3b;
+}
+
+
+
+
+
+
+
+
+
+
 form .policy{
   display: flex;
   align-items: center;
@@ -92,4 +125,18 @@ form .text h3 a{
 }
 form .text h3 a:hover{
   text-decoration: underline;
+}
+
+.textarea {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  padding: 0 15px;
+  font-size: 17px;
+  font-weight: 400;
+  color: #333;
+  border: 1.5px solid #C7BEBE;
+  border-bottom-width: 2.5px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
 }

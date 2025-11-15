@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html lang="en">
 
 <head>
 
@@ -48,7 +47,7 @@
                             <span>Dashboard</span></a>
                     </li>
                     <li class="nav-item active">
-                            <a class="nav-link" href="data_kamar.html">
+                            <a class="nav-link" href="data_kamar.php">
                                 <i class="fas fa-fw fa-hotel"></i>
                             <span>Data kamar</span></a>
                     </li>
@@ -282,6 +281,7 @@
                     <h1 class="h2 mb-2 text-gray-800">Data kamar kost</h1>
                     <p class="mb-4">Data kamar yang ada di bintang kost saat ini.</p>
 
+
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
@@ -292,36 +292,56 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
+                                            <th>No</th>
                                             <th>Nama Kamar</th>
                                             <th>kategori</th>
                                             <th>deskripsi</th>
                                             <th>fasilitas</th>
                                             <th>harga</th>
                                             <th>gambar</th>
+                                            <th>ketersediaan</th>
                                             <th>opsi</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
+                                            <th>No</th>
                                             <th>Nama Kamar</th>
                                             <th>kategori</th>
                                             <th>deskripsi</th>
                                             <th>fasilitas</th>
                                             <th>harga</th>
                                             <th>gambar</th>
+                                            <th>ketersediaan</th>
                                             <th></th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
+                                <?php include '../proses/koneksi.php'; ?>
+
+
+                                        <?php
+                                        $tampil = mysqli_query($koneksi,"select*from data_kamar");
+                                        $no= 1;
+                                        while ($hasil = mysqli_fetch_array($tampil)){
+                                        ?>
                                         <tr>
-                                            <td>Kamar 01</td>
-                                            <td>350k-400k</td>
-                                            <td>kost hemat cocok buat anda yang ingin hemat xixi</td>
-                                            <td>kasur,lemari,meja,kamar-mandi luar</td>
-                                            <td>400k</td>
-                                            <td></td>
-                                            <td><button class="btn btn-outline-danger"> Edit</button> | <button class="btn btn-outline-dark"> Hapus</button></td>
+                                            <td><?php echo $no++;?></td>
+                                            <td><?php echo $hasil['nama_kamar'] ?></td>
+                                            <td><?php echo $hasil['kategori'] ?></td>
+                                            <td><?php echo $hasil['deskripsi'] ?></td>
+                                            <td><?php echo $hasil['fasilitas'] ?></td>
+                                            <td><?php echo $hasil['harga'] ?></td>
+                                            <td><img width="100" src="../images/<?php echo $hasil['gambar'] ?>"></td>
+                                            <td><?php echo $hasil['ketersediaan'] ?></td>
+
+                                            
+                                            <td><a href="" class="btn btn-outline-danger"> Edit</a> | 
+                                            <button class="btn btn-outline-dark"> Hapus</button></td>
                                         </tr>
+
+                                        <?php
+                                        }?>
                                     </tbody>
                                 </table>
                             </div>
@@ -393,5 +413,4 @@
     <script src="../js/demo/datatables-demo.js"></script>
 
 </body>
-
 </html>
