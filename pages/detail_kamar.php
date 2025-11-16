@@ -53,7 +53,7 @@ if (!$kamar) {
              
         <div class="info">
           <h1><?php echo $kamar['nama_kamar']; ?></h1>
-          <div class="meta">Kebon Jeruk, Jakarta Barat • Kost Putri Eksklusif</div>
+          <div class="meta">kategori kamar <?php echo $kamar['kategori']; ?></div>
 
           <div class="section">
             <h3>Fasilitas</h3>

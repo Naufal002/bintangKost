@@ -31,15 +31,38 @@
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </head>
 
+
+
+<?php
+ session_start(); // WAJIB ada di paling atas file ini 
+?>
+
+
+
 <body data-bs-spy="scroll" data-bs-target="#navbar-example2" tabindex="0">
+
+<?php
+    // --- TAMBAHKAN BLOK INI ---
+    if(isset($_GET['pesan'])) {
+        if($_GET['pesan'] == "logout") {
+            echo "<script>alert('yakin mau logout?!');</script>";
+        }
+        // Tambahan: Nanti kamu juga bisa nambahin pesan lain
+        // elseif($_GET['pesan'] == "gagal_login") {
+        //    echo "<script>alert('Username atau password salah!');</script>";
+        // }
+    }
+    // --- AKHIR BLOK ---
+    ?>
 
   <!-- nav bar start  -->
   <header id="nav" class="site-header position-fixed text-white bg-dark">
+
     <nav id="navbar-example2" class="navbar navbar-expand-lg py-2">
 
       <div class="container ">
 
-        <a class="navbar-brand" href="./index.html"><img src="../images/logo.png" style="width: 150px;" alt="image"></a>
+        <a class="navbar-brand" href="./index.php"><img src="../images/logo.png" style="width: 150px;" alt="image"></a>
 
 
         <button class="navbar-toggler text-white" type="button" data-bs-toggle="offcanvas"
@@ -62,7 +85,7 @@
               aria-expanded="false">List kamar</a>
               <li class="nav-item dropdown ">
                 <ul class="dropdown-menu dropdown-menu-dark">
-                  <li><a href="kamar.html" class="dropdown-item">Semua kamar</a>
+                  <li><a href="kamar.php" class="dropdown-item">Semua kamar</a>
                   </li>
                   <li><a href="index.html" class="dropdown-item">350k - 400k</a>
                   </li>
@@ -86,11 +109,31 @@
               <li class="nav-item">
                 <a class="nav-link me-md-4" href="#help">Contact</a>
               </li>
-              
-              <li class="nav-item">
-                <a class="btn-medium btn btn-primary" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Login or Register</a>
+
+              <?php
+            // Cek, apakah "stempel" status_login ada dan bernilai true?
+              if (isset($_SESSION['status_login']) && $_SESSION['status_login'] === true):
+              ?>
+
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Halo, <b> <?php echo $_SESSION['username']; ?> </b>
+                  </a>
+                      <ul class="dropdown-menu dropdown-menu-dark">
+                          <li><a class="dropdown-item" href="dashboard_penyewa.php">Profil Saya</a></li>
+                          <li><a class="dropdown-item" href="pesanan.html">Riwayat Pesanan</a></li>
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item" href="../proses/logout.php">Logout</a></li>
+                      </ul>
               </li>
 
+    <?php else: ?>
+
+        <li class="nav-item">
+            <a class="btn-medium btn btn-primary" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Login or Register</a>
+        </li>
+
+    <?php endif; ?>
+              
               <!-- Modal -->
               <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
@@ -186,6 +229,13 @@
                                   class="form-label  fs-6 text-uppercase fw-bold text-black">nama</label>
                                 <input type="text" id="inputPassword2" placeholder="Nama"
                                   class="form-control ps-3" name="nama" aria-describedby="passwordHelpBlock">
+                              </div>
+
+                              <div class="form-input col-lg-12 my-4">
+                                <label for="inputPassword2"
+                                  class="form-label  fs-6 text-uppercase fw-bold text-black">No. Telp</label>
+                                <input type="number" id="inputPassword2" placeholder="Nama"
+                                  class="form-control ps-3" name="no_telp" aria-describedby="passwordHelpBlock">
                               </div>
 
                               <div class="form-input col-lg-12 my-4">
