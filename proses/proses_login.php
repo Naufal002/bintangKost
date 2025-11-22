@@ -19,6 +19,8 @@ if (mysqli_num_rows($result) > 0) {
     $_SESSION['username'] = $data['username'];
     $_SESSION['role'] = $data['role'];
 
+    $_SESSION['user_id'] = $data['id_user'];
+
     // Cek role untuk redirect
     if ($data['role'] == 'admin') {
         header("Location: ../pages/dashboard-admin.html");

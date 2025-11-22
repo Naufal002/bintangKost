@@ -230,6 +230,13 @@ if (isset($_SESSION['status_login']) && $_SESSION['status_login'] === true) {
                               </div>
 
                               <div class="form-input col-lg-12 my-4">
+                                <label for="inputPassword2"
+                                  class="form-label  fs-6 text-uppercase fw-bold text-black">no_telp</label>
+                                <input type="number" id="inputPassword2" placeholder="Nama"
+                                  class="form-control ps-3" name="no_telp" aria-describedby="passwordHelpBlock">
+                              </div>
+
+                              <div class="form-input col-lg-12 my-4">
                                 <input type="hidden" name="role" value="penyewa" id="inputPassword2" placeholder="Password"
                                   class="form-control ps-3" aria-describedby="passwordHelpBlock">
                               </div>

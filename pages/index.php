@@ -119,8 +119,8 @@
                   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Halo, <b> <?php echo $_SESSION['username']; ?> </b>
                   </a>
                       <ul class="dropdown-menu dropdown-menu-dark">
-                          <li><a class="dropdown-item" href="dashboard_penyewa.php">Profil Saya</a></li>
-                          <li><a class="dropdown-item" href="pesanan.html">Riwayat Pesanan</a></li>
+                          <li><a class="dropdown-item" href="dashboard-penyewa.html">Profil Saya</a></li>
+                          <li><a class="dropdown-item" href="pesanan.php">Riwayat Pesanan</a></li>
                           <li><hr class="dropdown-divider"></li>
                           <li><a class="dropdown-item" href="../proses/logout.php">Logout</a></li>
                       </ul>

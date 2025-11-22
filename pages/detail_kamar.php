@@ -1,4 +1,9 @@
 <!doctype html>
+
+<?php
+session_start(); // <--- INI YANG HILANG! WAJIB ADA.
+?>
+
 <html lang="id">
 <head>
   <meta charset="utf-8" />
@@ -8,8 +13,8 @@
   <!-- Swiper CSS -->
   <link
     rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-  />
+    href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="./css/datail_kamar.css">
 </head>
 <body>
@@ -92,7 +97,10 @@ if (!$kamar) {
         </div>
 
         <button class="btn outline">Tanya Pemilik</button>
-        <button class="btn green">Ajukan Sewa</button>
+        <button type="button" class="btn green" data-bs-toggle="modal" data-bs-target="#modalSewa">
+      Ajukan Sewa
+        </button>
+
       </div>
     </aside>
   </div>
@@ -141,6 +149,54 @@ if (!$kamar) {
   </section>
 </div>
 
+
+
+<div class="modal fade" id="modalSewa" tabindex="-1" aria-labelledby="labelModalSewa" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content text-dark" >
+      
+      <div class="modal-header">
+        <h5 class="modal-title" id="labelModalSewa">Form Pengajuan Sewa</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <form action="../proses/proses_sewa.php" method="POST" enctype="multipart/form-data">
+          
+          <div class="modal-body">
+            
+            <input type="hidden" name="id_kamar" value="<?php echo $kamar['id_kamar']; ?>">
+            
+            <input type="hidden" name="id_user" value="<?php echo $_SESSION['user_id'] ?? ''; ?>">
+
+            <div class="mb-3">
+                <label class="form-label">Nama Lengkap (Sesuai KTP)</label>
+                <input type="text" name="nama_lengkap" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Alamat Asal</label>
+                <textarea name="alamat_ktp" class="form-control" rows="3" required></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Foto KTP</label>
+                <input type="file" name="foto_ktp" class="form-control" accept=".jpg, .jpeg, .png" required>
+                <small class="text-muted">Format: JPG/PNG, Maks 2MB</small>
+            </div>
+
+          </div>
+          
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+            <button type="submit" class="btn btn-success">Kirim Pengajuan</button>
+          </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>
+
 <!-- Swiper JS -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
@@ -163,5 +219,7 @@ if (!$kamar) {
     },
   });
 </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
