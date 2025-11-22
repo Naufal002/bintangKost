@@ -52,7 +52,7 @@
                             <span>Data kamar</span></a>
                     </li>
                     <li class="nav-item active">
-                            <a class="nav-link" href="data_pesanan.html">
+                            <a class="nav-link" href="data_pesanan.php">
                                 <i class="fas fa-fw fa-book-reader"></i>
                             <span>Data Pesanan</span></a>
                     </li>

@@ -47,7 +47,7 @@ include '../proses/koneksi.php';
                     <span>Dashboard</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="data_kamar.html">
+                <a class="nav-link" href="data_kamar.php">
                     <i class="fas fa-fw fa-hotel"></i>
                     <span>Data Kamar</span></a>
             </li>
