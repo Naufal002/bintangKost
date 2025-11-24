@@ -336,8 +336,8 @@
                                             <td><?php echo $hasil['ketersediaan'] ?></td>
 
                                             
-                                            <td><a href="" class="btn btn-outline-danger"> Edit</a> | 
-                                            <button class="btn btn-outline-dark"> Hapus</button></td>
+                                            <td><a href="edit_data_kamar.php?id=<?php echo $hasil['id_kamar']; ?>" class="btn btn-warning ">Edit</a> | 
+                                            <a href="../proses/proses_hapus_kamar.php?id=<?php echo $hasil['id_kamar']; ?>" class="btn btn-outline-dark" onclick="return confirm('Yakin hapus kamar ini?')"> Hapus</a></td>
                                         </tr>
 
                                         <?php
