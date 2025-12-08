@@ -5,8 +5,7 @@ include '../proses/koneksi.php';
 // Cek apakah sudah login sebagai penyewa?
 // if($_SESSION['role'] != 'penyewa'){ header("location:../login.php"); }
 
-// Ambil ID User dari session (Pastikan login.php sudah set $_SESSION['id_user'])
-// Kalau belum ada login, kita set dummy id dulu biar errornya ilang saat testing
+// Ambil ID User dari session
 $id_user = isset($_SESSION['id_user']) ? $_SESSION['id_user'] : 0; 
 $nama_user = isset($_SESSION['nama']) ? $_SESSION['nama'] : "Penyewa";
 
@@ -36,11 +35,17 @@ if($cek_ada_pesanan > 0) {
     $nama_kamar = $data_sewa['nama_kamar'];
     $harga_kamar = $data_sewa['harga'];
 
+    // --- [BARU] HITUNG TANGGAL BERAKHIR (Durasi 30 Hari) ---
+    $tgl_mulai = $data_sewa['tanggal_pengajuan'];
+    // Rumus: Tanggal Mulai + 30 Hari
+    $tgl_berakhir = date('Y-m-d', strtotime('+30 days', strtotime($tgl_mulai)));
+    // -------------------------------------------------------
+
     // Atur Warna & Pesan berdasarkan Status
     if($status_sewa == 'Lunas') {
         $warna_status = "success"; // Hijau
         $pesan_status = "Selamat! Pesanan kamu sudah dikonfirmasi. Silakan tempati kamar.";
-    } elseif ($status_sewa == 'Pending') {
+    } elseif ($status_sewa == 'Menunggu Konfirmasi' || $status_sewa == 'Menunggu Verifikasi') {
         $warna_status = "warning"; // Kuning
         $pesan_status = "Pesanan sedang diperiksa pemilik kost. Mohon tunggu konfirmasi.";
     } elseif ($status_sewa == 'Ditolak') {
@@ -48,7 +53,6 @@ if($cek_ada_pesanan > 0) {
         $pesan_status = "Maaf, pengajuan sewa kamu ditolak. Silakan cari kamar lain.";
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -103,7 +107,7 @@ if($cek_ada_pesanan > 0) {
             <li class="nav-item">
                 <a class="nav-link" href="keluhan.php">
                     <i class="fas fa-fw fa-mail-bulk"></i>
-                    <span>keluhan anda</span></a>
+                    <span>Keluhan Anda</span></a>
             </li>
 
             <hr class="sidebar-divider">
@@ -210,11 +214,20 @@ if($cek_ada_pesanan > 0) {
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                                Tanggal Pengajuan</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                                <?php echo date('d M Y', strtotime($data_sewa['tanggal_pengajuan'])); ?>
+                                                Periode Sewa (30 Hari)</div>
+                                            
+                                            <div class="h6 mb-0 font-weight-bold text-gray-800">
+                                                <small class="text-secondary">Mulai:</small><br>
+                                                <?php echo date('d M Y', strtotime($tgl_mulai)); ?>
+                                                
+                                                <hr class="my-1">
+                                                
+                                                <small class="text-secondary">Berakhir:</small><br>
+                                                <span class="text-danger">
+                                                    <?php echo date('d M Y', strtotime($tgl_berakhir)); ?>
+                                                </span>
                                             </div>
-                                        </div>
+                                            </div>
                                         <div class="col-auto">
                                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
                                         </div>
@@ -222,6 +235,7 @@ if($cek_ada_pesanan > 0) {
                                 </div>
                             </div>
                         </div>
+
                     </div>
                     <?php } else { ?>
                         <div class="text-center mt-5">
@@ -231,30 +245,24 @@ if($cek_ada_pesanan > 0) {
                         </div>
                     <?php } ?>
 
-
-
-                    <!-- logout modal -->
-                     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Yakin mau keluar?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">Pilih "Logout" di bawah jika kamu ingin mengakhiri sesi ini.</div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
-                
-                <a class="btn btn-primary" href="../proses/logout.php">Logout</a>
-            </div>
-        </div>
-    </div>
-</div>
-                     <!-- logout modal -->
-
-                </div>
+                    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Yakin mau keluar?</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">Pilih "Logout" di bawah jika kamu ingin mengakhiri sesi ini.</div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
+                                    <a class="btn btn-primary" href="../proses/logout.php">Logout</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
                 </div>
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
