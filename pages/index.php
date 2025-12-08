@@ -45,7 +45,7 @@
     // --- TAMBAHKAN BLOK INI ---
     if(isset($_GET['pesan'])) {
         if($_GET['pesan'] == "logout") {
-            echo "<script>alert('yakin mau logout?!');</script>";
+            echo "<script>alert('anda sudah logout!');</script>";
         }
         // Tambahan: Nanti kamu juga bisa nambahin pesan lain
         // elseif($_GET['pesan'] == "gagal_login") {
@@ -81,28 +81,9 @@
               <li class="nav-item">
                 <a class="nav-link active me-md-4" href="#billboard">Home</a>
               </li>
-              <a class="nav-link me-md-4 text-center dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-              aria-expanded="false">List kamar</a>
-              <li class="nav-item dropdown ">
-                <ul class="dropdown-menu dropdown-menu-dark">
-                  <li><a href="kamar.php" class="dropdown-item">Semua kamar</a>
-                  </li>
-                  <li><a href="index.html" class="dropdown-item">350k - 400k</a>
-                  </li>
-                  <li><a href="index.html" class="dropdown-item">450k -500k <span
-                        class="badge bg-secondary">super</span></a></li>
-                  <li><a href="index.html" class="dropdown-item">550k - 600k <span
-                        class="badge bg-secondary">super 2</span></a></li>
-                  <li><a href="index.html" class="dropdown-item">650k - 700k<span
-                        class="badge bg-secondary">super 3</span></a></li>
-                  <li><a href="index.html" class="dropdown-item">750k - 800k <span
-                        class="badge bg-secondary">super 4</span></a></li>
-                  <li><a href="index.html" class="dropdown-item">8050k - 1jt <span
-                        class="badge bg-secondary">super 5</span></a></li>
-                  <li><a href="index.html" class="dropdown-item">1jt - 3jt</a>
-                  </li>
-                </ul>
-              </li>
+              <a class="nav-link me-md-4 text-center" href="kamar.php" role="button"
+              aria-expanded="false">Semua Kamar</a>
+
               <li class="nav-item">
                 <a class="nav-link me-md-4" href="#about-us">Tentang kami</a>
               </li>
@@ -110,29 +91,46 @@
                 <a class="nav-link me-md-4" href="#help">Contact</a>
               </li>
 
-              <?php
-            // Cek, apakah "stempel" status_login ada dan bernilai true?
+             <?php
+              // Cek apakah user sudah login?
               if (isset($_SESSION['status_login']) && $_SESSION['status_login'] === true):
               ?>
 
               <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Halo, <b> <?php echo $_SESSION['username']; ?> </b>
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Halo, <b> <?php echo $_SESSION['username']; ?> </b> (<?php echo ucfirst($_SESSION['role']); ?>)
                   </a>
-                      <ul class="dropdown-menu dropdown-menu-dark">
-                          <li><a class="dropdown-item" href="dashboard-penyewa.html">Profil Saya</a></li>
+                  <ul class="dropdown-menu dropdown-menu-dark">
+                      
+                      <?php if ($_SESSION['role'] == 'admin'): ?>
+                          <li><a class="dropdown-item" href="dashboard-admin.php">Dashboard Admin</a></li>
+                          <li><a class="dropdown-item" href="data_pesanan.php">Kelola Pesanan</a></li>
+                      
+                      <?php elseif ($_SESSION['role'] == 'pemilik'): ?>
+                          <li><a class="dropdown-item" href="dashboard-pemilik.php">Dashboard Pemilik</a></li>
+                          <li><a class="dropdown-item" href="data_pesanan_pemilik.php">Laporan Keuangan</a></li>
+
+                      <?php else: ?>
+                          <li><a class="dropdown-item" href="dashboard-penyewa.php">Dashboard Saya</a></li>
                           <li><a class="dropdown-item" href="pesanan.php">Riwayat Pesanan</a></li>
-                          <li><hr class="dropdown-divider"></li>
-                          <li><a class="dropdown-item" href="../proses/logout.php">Logout</a></li>
-                      </ul>
+                      <?php endif; ?>
+
+                      <li><hr class="dropdown-divider"></li>
+                      <li>
+    <a class="dropdown-item text-danger" href="#" data-bs-toggle="modal" data-bs-target="#modalLogout">
+        <i class="bi bi-box-arrow-right"></i> Logout
+    </a>
+</li>
+                  </ul>
               </li>
 
-    <?php else: ?>
+              <?php else: ?>
 
-        <li class="nav-item">
-            <a class="btn-medium btn btn-primary" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Login or Register</a>
-        </li>
+              <li class="nav-item">
+                  <a class="btn-medium btn btn-primary" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Login / Sign in</a>
+              </li>
 
-    <?php endif; ?>
+              <?php endif; ?>
               
               <!-- Modal -->
               <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -526,7 +524,7 @@
       </div>
 
       <div class="residence-btn">
-        <a href="kamar.html" class="btn btn-primary btn-lg my-5">Rekomendasi kamar lainnya</a>
+        <a href="kamar.php" class="btn btn-primary btn-lg my-5">Rekomendasi kamar lainnya</a>
       </div>
 
     </div>
@@ -737,6 +735,36 @@
         </div>
       </footer>
     </div>
+
+
+
+
+    <!-- modal logout -->
+     <div class="modal fade" id="modalLogout" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      
+      <div class="modal-header border-0">
+        <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Keluar</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      
+      <div class="modal-body text-center py-4">
+        <ion-icon name="log-out-outline" style="font-size: 64px; color: #dc3545;"></ion-icon>
+        <h5 class="mt-3">Yakin mau udahan?</h5>
+        <p class="text-muted">Sesi kamu akan berakhir setelah menekan tombol "Ya".</p>
+      </div>
+      
+      <div class="modal-footer border-0 justify-content-center">
+        <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">Batal</button>
+        
+        <a href="../proses/logout.php" class="btn btn-danger px-4">Ya, Logout</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+     <!-- modal logout -->
 
 
 

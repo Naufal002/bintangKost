@@ -58,7 +58,7 @@ if (!$data) {
 
       <div style="margin-bottom: 10px;">
         <p style="font-size: 14px; margin-bottom: 5px;">Gambar Saat Ini:</p>
-        <img src="../images/<?php echo $data['gambar']; ?>" width="100" style="border-radius: 5px; border: 1px solid #ccc;">
+        <img src="../images/upload/<?php echo $data['gambar']; ?>" width="100" style="border-radius: 5px; border: 1px solid #ccc;">
       </div>
 
       <div class="input-box">

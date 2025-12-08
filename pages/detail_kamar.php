@@ -52,7 +52,7 @@ if (!$kamar) {
   <div class="grid">
     <main>
       <div class="card">
-         <img src="../images/<?php echo $kamar['gambar']; ?>" 
+         <img src="../images/upload/<?php echo $kamar['gambar']; ?>" 
              style="width:100%; height:auto;" 
              alt="<?php echo $kamar['nama_kamar']; ?>">
              
@@ -92,11 +92,11 @@ if (!$kamar) {
       <div class="priceBox">
         <div style="font-size:13px;color:var(--accent);font-weight:600">Diskon 10%</div>
         <div class="price">
-          Rp <?php echo number_format($kamar['harga']); ?>.000
+          Rp <?php echo number_format($kamar['harga']); ?>
           <span class="small">/bulan</span>
         </div>
 
-        <button class="btn outline">Tanya Pemilik</button>
+        <a href="https://wa.me/6285602494352" class="btn outline">Tanya Pemilik</a>
         <button type="button" class="btn green" data-bs-toggle="modal" data-bs-target="#modalSewa">
       Ajukan Sewa
         </button>

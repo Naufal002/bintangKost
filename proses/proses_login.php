@@ -1,40 +1,49 @@
 <?php
-// 1. PINDAHKAN KE BARIS 1, WAJIB!
-session_start(); 
-
+session_start();
 include 'koneksi.php';
 
-$username = $_POST['username'];
+// Tangkap data dari form modal
+$email    = $_POST['email']; // Di form kamu ada input email
+$username = $_POST['username']; // Dan ada input username juga
 $password = $_POST['password'];
 
-// (Ini masih plain text & bahaya, tapi oke... demi deadline)
-$query = "SELECT * FROM login_user WHERE username='$username' AND password='$password'";
-$result = mysqli_query($koneksi, $query);
+// Cek data di database (Mencocokkan username DAN password)
+// Note: Di form loginmu ada input email & username. 
+// Biasanya login cukup salah satu, tapi karena di form ada dua-duanya, kita cek username saja yang lebih unik.
+$login = mysqli_query($koneksi, "SELECT * FROM login_user WHERE username='$username' AND password='$password'");
+$cek = mysqli_num_rows($login);
 
-if (mysqli_num_rows($result) > 0) {
-    $data = mysqli_fetch_assoc($result);
+if($cek > 0){
+    $data = mysqli_fetch_assoc($login);
 
-    // 2. TAMBAHKAN INI! Ini "stempel" yang kamu cek di navbar
-    $_SESSION['status_login'] = true; 
-    $_SESSION['username'] = $data['username'];
-    $_SESSION['role'] = $data['role'];
+    // Buat Session Login
+    $_SESSION['username'] = $username;
+    $_SESSION['nama']     = $data['nama'];
+    $_SESSION['role']     = $data['role'];
+    $_SESSION['id_user']  = $data['id_user']; // PENTING: ID User buat dashboard penyewa
+    $_SESSION['status_login'] = true;
 
-    $_SESSION['user_id'] = $data['id_user'];
+    // Cek Role (Level User) dan Lempar ke Halaman yang Sesuai
+    if($data['role'] == "admin"){
+        // Redirect ke Dashboard Admin
+        header("location:../pages/dashboard-admin.php");
 
-    // Cek role untuk redirect
-    if ($data['role'] == 'admin') {
-        header("Location: ../pages/dashboard-admin.html");
-        exit; // 3. SELALU tambahkan 'exit;' setelah header
-    } elseif ($data['role'] == 'pemilik') {
-        header("Location: ../pages/dashboard-pemilik.html");
-        exit; // 3. SELALU tambahkan 'exit;' setelah header
-    } elseif ($data['role'] == 'penyewa') {
-        header("Location: ../pages/index.php");
-        exit; // 3. SELALU tambahkan 'exit;' setelah header
+    } else if($data['role'] == "pemilik"){
+        // Redirect ke Dashboard Pemilik
+        header("location:../pages/dashboard-pemilik.php");
+
+    } else if($data['role'] == "penyewa"){
+        // Redirect Balik ke Halaman Utama (Landing Page)
+        // Karena file index.php ada di folder 'user' atau root, sesuaikan path-nya
+        // Asumsi file index.php ada di folder 'user'
+        header("location:../pages/index.php"); 
     } else {
-        echo "<script>alert('Role tidak dikenali!'); window.location='../pages/index.html';</script>";
+        // Role tidak dikenali
+        header("location:../pages/index.php?pesan=gagal_login");
     }
+
 } else {
-    echo "<script>alert('Username atau password salah!'); window.location='../pages/index.html';</script>";
+    // Kalau Username/Password Salah
+    header("location:../pages/index.php?pesan=gagal_login");
 }
 ?>
