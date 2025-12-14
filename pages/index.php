@@ -33,27 +33,26 @@
 
 
 
-<?php
- session_start(); // WAJIB ada di paling atas file ini 
+<?php session_start();
+// WAJIB ada di paling atas file ini
 ?>
 
 
 
 <body data-bs-spy="scroll" data-bs-target="#navbar-example2" tabindex="0">
 
-<?php
-    // --- TAMBAHKAN BLOK INI ---
-    if(isset($_GET['pesan'])) {
-        if($_GET['pesan'] == "logout") {
-            echo "<script>alert('anda sudah logout!');</script>";
-        }
-        // Tambahan: Nanti kamu juga bisa nambahin pesan lain
-        // elseif($_GET['pesan'] == "gagal_login") {
-        //    echo "<script>alert('Username atau password salah!');</script>";
-        // }
+<?php // --- TAMBAHKAN BLOK INI ---
+if (isset($_GET["pesan"])) {
+    if ($_GET["pesan"] == "logout") {
+        echo "<script>alert('anda sudah logout!');</script>";
     }
-    // --- AKHIR BLOK ---
-    ?>
+    // Tambahan: Nanti kamu juga bisa nambahin pesan lain
+    // elseif($_GET['pesan'] == "gagal_login") {
+    //    echo "<script>alert('Username atau password salah!');</script>";
+    // }
+}
+// --- AKHIR BLOK ---
+?>
 
   <!-- nav bar start  -->
   <header id="nav" class="site-header position-fixed text-white bg-dark">
@@ -91,22 +90,25 @@
                 <a class="nav-link me-md-4" href="#help">Contact</a>
               </li>
 
-             <?php
-              // Cek apakah user sudah login?
-              if (isset($_SESSION['status_login']) && $_SESSION['status_login'] === true):
-              ?>
+             <?php // Cek apakah user sudah login?
+             if (
+                 isset($_SESSION["status_login"]) &&
+                 $_SESSION["status_login"] === true
+             ): ?>
 
               <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Halo, <b> <?php echo $_SESSION['username']; ?> </b> (<?php echo ucfirst($_SESSION['role']); ?>)
+                      Halo, <b> <?php echo $_SESSION[
+                          "username"
+                      ]; ?> </b> (<?php echo ucfirst($_SESSION["role"]); ?>)
                   </a>
                   <ul class="dropdown-menu dropdown-menu-dark">
-                      
-                      <?php if ($_SESSION['role'] == 'admin'): ?>
+
+                      <?php if ($_SESSION["role"] == "admin"): ?>
                           <li><a class="dropdown-item" href="dashboard-admin.php">Dashboard Admin</a></li>
                           <li><a class="dropdown-item" href="data_pesanan.php">Kelola Pesanan</a></li>
-                      
-                      <?php elseif ($_SESSION['role'] == 'pemilik'): ?>
+
+                      <?php elseif ($_SESSION["role"] == "pemilik"): ?>
                           <li><a class="dropdown-item" href="dashboard-pemilik.php">Dashboard Pemilik</a></li>
                           <li><a class="dropdown-item" href="data_pesanan_pemilik.php">Laporan Keuangan</a></li>
 
@@ -131,7 +133,7 @@
               </li>
 
               <?php endif; ?>
-              
+
               <!-- Modal -->
               <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
@@ -232,7 +234,7 @@
                               <div class="form-input col-lg-12 my-4">
                                 <label for="inputPassword2"
                                   class="form-label  fs-6 text-uppercase fw-bold text-black">No. Telp</label>
-                                <input type="number" id="inputPassword2" placeholder="Nama"
+                                <input type="number" id="inputPassword2" placeholder="Telepon"
                                   class="form-control ps-3" name="no_telp" aria-describedby="passwordHelpBlock">
                               </div>
 
@@ -358,8 +360,8 @@
           <div class="my-3" role="group" aria-label="3 / 7" style="width: 158.667px; margin-right: 20px;"><img
               alt="image" style="width: 200px; padding-right: 20px;" src="../assets/umku.png"></div>
         </div>
-        
-        
+
+
       </div>
     </div>
   </section>
@@ -743,21 +745,21 @@
      <div class="modal fade" id="modalLogout" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-      
+
       <div class="modal-header border-0">
         <h5 class="modal-title" id="exampleModalLabel">Konfirmasi Keluar</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      
+
       <div class="modal-body text-center py-4">
         <ion-icon name="log-out-outline" style="font-size: 64px; color: #dc3545;"></ion-icon>
         <h5 class="mt-3">Yakin mau udahan?</h5>
         <p class="text-muted">Sesi kamu akan berakhir setelah menekan tombol "Ya".</p>
       </div>
-      
+
       <div class="modal-footer border-0 justify-content-center">
         <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">Batal</button>
-        
+
         <a href="../proses/logout.php" class="btn btn-danger px-4">Ya, Logout</a>
       </div>
 
