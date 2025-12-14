@@ -1,16 +1,16 @@
 <?php
 session_start();
-include '../proses/koneksi.php';
+include "../proses/koneksi.php";
 
 // 1. CEK LOGIN (WAJIB ADA)
 // Pastikan user sudah login, kalau belum lempar ke login
-if (!isset($_SESSION['id_user'])) {
+if (!isset($_SESSION["id_user"])) {
     header("Location: ../login.php?pesan=belum_login");
-    exit;
+    exit();
 }
 
-$id_user = $_SESSION['id_user'];
-$nama_user = isset($_SESSION['nama']) ? $_SESSION['nama'] : "Penyewa";
+$id_user = $_SESSION["id_user"];
+$nama_user = isset($_SESSION["nama"]) ? $_SESSION["nama"] : "Penyewa";
 ?>
 
 <!DOCTYPE html>
@@ -82,7 +82,7 @@ $nama_user = isset($_SESSION['nama']) ? $_SESSION['nama'] : "Penyewa";
                     <i class="fas fa-fw fa-sign-out-alt"></i>
                     <span>Logout</span></a>
             </li>
-            
+
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
@@ -99,7 +99,7 @@ $nama_user = isset($_SESSION['nama']) ? $_SESSION['nama'] : "Penyewa";
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Halo, <?= $nama_user; ?></span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Halo, <?= $nama_user ?></span>
                                 <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
                             </a>
                         </li>
@@ -131,68 +131,112 @@ $nama_user = isset($_SESSION['nama']) ? $_SESSION['nama'] : "Penyewa";
                                     <tbody>
                                         <?php
                                         // Query hanya menampilkan data milik user yang sedang login
-                                        $query = "SELECT ps.*, k.nama_kamar, k.gambar, k.kategori, k.harga 
+                                        $query = "SELECT ps.*, k.nama_kamar, k.gambar, k.kategori, k.harga
                                                   FROM pengajuan_sewa ps
                                                   JOIN data_kamar k ON ps.id_kamar = k.id_kamar
-                                                  WHERE ps.id_user = '$id_user' 
+                                                  WHERE ps.id_user = '$id_user'
                                                   ORDER BY ps.tanggal_pengajuan DESC";
-                                        
-                                        $result = mysqli_query($koneksi, $query);
+
+                                        $result = mysqli_query(
+                                            $koneksi,
+                                            $query,
+                                        );
                                         $no = 1;
-                                        while ($row = mysqli_fetch_assoc($result)) :
-                                        ?>
+                                        while (
+                                            $row = mysqli_fetch_assoc($result)
+                                        ): ?>
                                         <tr>
-                                            <td class="text-center"><?= $no++; ?></td>
+                                            <td class="text-center"><?= $no++ ?></td>
                                             <td>
-                                                <img src="../images/upload/<?= $row['gambar'] ?>" width="80" style="border-radius:5px; margin-bottom:5px;">
+                                                <img src="../images/upload/<?= $row[
+                                                    "gambar"
+                                                ] ?>" width="80" style="border-radius:5px; margin-bottom:5px;">
                                                 <br>
-                                                <b><?= $row['nama_kamar'] ?></b>
+                                                <b><?= $row["nama_kamar"] ?></b>
                                                 <br>
-                                                <small class="text-muted"><?= $row['kategori'] ?></small>
+                                                <small class="text-muted"><?= $row[
+                                                    "kategori"
+                                                ] ?></small>
                                             </td>
-                                            <td>Rp <?= number_format($row['harga'], 0, ',', '.') ?></td>
-                                            <td><?= date('d M Y', strtotime($row['tanggal_pengajuan'])) ?></td>
-                                            
+                                            <td>Rp <?= number_format(
+                                                $row["harga"],
+                                                0,
+                                                ",",
+                                                ".",
+                                            ) ?></td>
+                                            <td><?= date(
+                                                "d M Y",
+                                                strtotime(
+                                                    $row["tanggal_pengajuan"],
+                                                ),
+                                            ) ?></td>
+
                                             <td class="text-center">
-                                                <?php 
-                                                if ($row['status'] == 'Pending') { // Di DB mungkin 'Menunggu Konfirmasi'
+                                                <?php if (
+                                                    $row["status"] == "Pending"
+                                                ) {
+                                                    // Di DB mungkin 'Menunggu Konfirmasi'
                                                     echo '<span class="badge badge-warning">Menunggu Konfirmasi</span>';
-                                                } elseif ($row['status'] == 'Disetujui') {
+                                                } elseif (
+                                                    $row["status"] ==
+                                                    "Disetujui"
+                                                ) {
                                                     echo '<span class="badge badge-primary">Disetujui (Silakan Bayar)</span>';
-                                                } elseif ($row['status'] == 'Menunggu Verifikasi') {
+                                                } elseif (
+                                                    $row["status"] ==
+                                                    "Menunggu Verifikasi"
+                                                ) {
                                                     echo '<span class="badge badge-info">Sedang Diverifikasi</span>';
-                                                } elseif ($row['status'] == 'Lunas') {
+                                                } elseif (
+                                                    $row["status"] == "Lunas"
+                                                ) {
                                                     echo '<span class="badge badge-success">Lunas / Aktif</span>';
                                                 } else {
                                                     echo '<span class="badge badge-danger">Ditolak</span>';
-                                                }
-                                                ?>
+                                                } ?>
                                             </td>
 
                                             <td class="text-center">
-                                                <?php if ($row['status'] == 'Pending') : ?>
-                                                    <a href="../proses/proses_batal.php?id=<?= $row['id_sewa'] ?>&aksi=batal" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin membatalkan pesanan ini?')">
+                                                <?php if (
+                                                    $row["status"] == "Pending"
+                                                ): ?>
+                                                    <a href="../proses/proses_batal.php?id=<?= $row[
+                                                        "id_sewa"
+                                                    ] ?>&aksi=batal" class="btn btn-danger btn-sm" onclick="return confirm('Yakin ingin membatalkan pesanan ini?')">
                                                         <i class="fas fa-times"></i> Batal
                                                     </a>
 
-                                                <?php elseif ($row['status'] == 'Disetujui') : ?>
-                                                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalBayar<?= $row['id_sewa'] ?>">
-                                                        <i class="fas fa-upload"></i> Upload Bukti
+                                                <?php elseif (
+                                                    $row["status"] ==
+                                                    "Disetujui"
+                                                ): ?>
+                                                    <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalBayar<?= $row[
+                                                        "id_sewa"
+                                                    ] ?>">
+                                                        <i class="fas fa-upload"></i> Bayar sekarang
                                                     </button>
 
-                                                <?php elseif ($row['status'] == 'Ditolak') : ?>
-                                                    <a href="../proses/proses_batal.php?id=<?= $row['id_sewa'] ?>&aksi=hapus" class="btn btn-secondary btn-sm" onclick="return confirm('Hapus dari riwayat?')">
+                                                <?php elseif (
+                                                    $row["status"] == "Ditolak"
+                                                ): ?>
+                                                    <a href="../proses/proses_batal.php?id=<?= $row[
+                                                        "id_sewa"
+                                                    ] ?>&aksi=hapus" class="btn btn-secondary btn-sm" onclick="return confirm('Hapus dari riwayat?')">
                                                         <i class="fas fa-trash"></i> Hapus
                                                     </a>
-                                                
+
                                                 <?php else: ?>
                                                     <small class="text-muted">Tidak ada aksi</small>
                                                 <?php endif; ?>
                                             </td>
                                         </tr>
 
-                                        <?php if($row['status'] == 'Disetujui'): ?>
-                                        <div class="modal fade" id="modalBayar<?= $row['id_sewa'] ?>" tabindex="-1" role="dialog">
+                                        <?php if (
+                                            $row["status"] == "Disetujui"
+                                        ): ?>
+                                        <div class="modal fade" id="modalBayar<?= $row[
+                                            "id_sewa"
+                                        ] ?>" tabindex="-1" role="dialog">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -204,10 +248,19 @@ $nama_user = isset($_SESSION['nama']) ? $_SESSION['nama'] : "Penyewa";
                                                     <form action="../proses/proses_bayar.php" method="POST" enctype="multipart/form-data">
                                                         <div class="modal-body">
                                                             <div class="alert alert-info">
-                                                                Silakan transfer sebesar <b>Rp <?= number_format($row['harga'], 0, ',', '.') ?></b><br>
+                                                                Silakan transfer sebesar <b>Rp <?= number_format(
+                                                                    $row[
+                                                                        "harga"
+                                                                    ],
+                                                                    0,
+                                                                    ",",
+                                                                    ".",
+                                                                ) ?></b><br>
                                                                 Ke Rekening: <b>BCA 123-456-789</b> a.n BintangKost
                                                             </div>
-                                                            <input type="hidden" name="id_sewa" value="<?= $row['id_sewa'] ?>">
+                                                            <input type="hidden" name="id_sewa" value="<?= $row[
+                                                                "id_sewa"
+                                                            ] ?>">
                                                             <div class="form-group">
                                                                 <label>Foto Bukti Transfer</label>
                                                                 <input type="file" name="bukti_bayar" class="form-control-file" required>
@@ -223,7 +276,8 @@ $nama_user = isset($_SESSION['nama']) ? $_SESSION['nama'] : "Penyewa";
                                             </div>
                                         </div>
                                         <?php endif; ?>
-                                        <?php endwhile; ?>
+                                        <?php endwhile;
+                                        ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -246,7 +300,7 @@ $nama_user = isset($_SESSION['nama']) ? $_SESSION['nama'] : "Penyewa";
             <div class="modal-body">Pilih "Logout" di bawah jika kamu ingin mengakhiri sesi ini.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
-                
+
                 <a class="btn btn-primary" href="../proses/logout.php">Logout</a>
             </div>
         </div>
@@ -256,7 +310,7 @@ $nama_user = isset($_SESSION['nama']) ? $_SESSION['nama'] : "Penyewa";
 
 
 
-            
+
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
