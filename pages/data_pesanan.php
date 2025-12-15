@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../proses/koneksi.php';
+include "../proses/koneksi.php";
 
 // Cek session Admin
 // if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
@@ -132,80 +132,127 @@ include '../proses/koneksi.php';
                                             <th>Tgl Pengajuan</th>
                                             <th>Status Saat Ini</th>
                                             <th>Aksi Admin</th>
+                                            <!--<th>KTP</th>-->
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
                                         // JOIN Tabel Pengajuan Sewa + Data Kamar + Login User (Opsional, pakai nama_lengkap dari pengajuan aja cukup)
-                                        $query = "SELECT ps.*, k.nama_kamar 
+                                        $query = "SELECT ps.*, k.nama_kamar
                                                   FROM pengajuan_sewa ps
                                                   JOIN data_kamar k ON ps.id_kamar = k.id_kamar
                                                   ORDER BY ps.tanggal_pengajuan DESC";
-                                        $result = mysqli_query($koneksi, $query);
+                                        $result = mysqli_query(
+                                            $koneksi,
+                                            $query,
+                                        );
                                         $no = 1;
-                                        while ($row = mysqli_fetch_assoc($result)) :
-                                        ?>
+                                        while (
+                                            $row = mysqli_fetch_assoc($result)
+                                        ): ?>
                                         <tr>
-                                            <td class="text-center"><?= $no++; ?></td>
-                                            <td><?= $row['nama_kamar']; ?></td>
+                                            <td class="text-center"><?= $no++ ?></td>
+                                            <td><?= $row["nama_kamar"] ?></td>
                                             <td>
-                                                <strong><?= $row['nama_lengkap']; ?></strong><br>
+                                                <strong><?= $row[
+                                                    "nama_lengkap"
+                                                ] ?></strong><br>
                                                 <small class="text-muted">KTP: ... (Opsional)</small>
                                             </td>
-                                            <td><?= date('d M Y, H:i', strtotime($row['tanggal_pengajuan'])); ?></td>
-                                            
+                                            <td><?= date(
+                                                "d M Y, H:i",
+                                                strtotime(
+                                                    $row["tanggal_pengajuan"],
+                                                ),
+                                            ) ?></td>
+
                                             <td class="text-center">
-                                                <?php 
-                                                if ($row['status'] == 'Pending') {
+                                                <?php if (
+                                                    $row["status"] == "Pending"
+                                                ) {
                                                     echo '<span class="badge badge-warning">Menunggu Konfirmasi</span>';
-                                                } elseif ($row['status'] == 'Disetujui') {
+                                                } elseif (
+                                                    $row["status"] ==
+                                                    "Disetujui"
+                                                ) {
                                                     echo '<span class="badge badge-info">Menunggu Pembayaran</span>';
-                                                } elseif ($row['status'] == 'Menunggu Verifikasi') {
+                                                } elseif (
+                                                    $row["status"] ==
+                                                    "Menunggu Verifikasi"
+                                                ) {
                                                     echo '<span class="badge badge-primary">Cek Bukti Bayar</span>';
-                                                } elseif ($row['status'] == 'Lunas') {
+                                                } elseif (
+                                                    $row["status"] == "Lunas"
+                                                ) {
                                                     echo '<span class="badge badge-success">Lunas / Aktif</span>';
                                                 } else {
                                                     echo '<span class="badge badge-danger">Ditolak</span>';
-                                                }
-                                                ?>
+                                                } ?>
                                             </td>
 
                                             <td class="text-center">
-                                                <?php if ($row['status'] == 'Pending') : ?>
-                                                    <a href="../proses/proses_status.php?id=<?= $row['id_sewa'] ?>&aksi=terima" class="btn btn-success btn-sm" onclick="return confirm('Terima pengajuan ini? User akan diminta upload bukti bayar.')">
+                                                <?php if (
+                                                    $row["status"] == "Pending"
+                                                ): ?>
+                                                    <a href="../proses/proses_status.php?id=<?= $row[
+                                                        "id_sewa"
+                                                    ] ?>&aksi=terima" class="btn btn-success btn-sm" onclick="return confirm('Terima pengajuan ini? User akan diminta upload bukti bayar.')">
                                                         <i class="fas fa-check"></i> Terima
                                                     </a>
-                                                    <a href="../proses/proses_status.php?id=<?= $row['id_sewa'] ?>&aksi=tolak" class="btn btn-danger btn-sm" onclick="return confirm('Tolak pengajuan ini?')">
+                                                    <a href="../proses/proses_status.php?id=<?= $row[
+                                                        "id_sewa"
+                                                    ] ?>&aksi=tolak" class="btn btn-danger btn-sm" onclick="return confirm('Tolak pengajuan ini?')">
                                                         <i class="fas fa-times"></i> Tolak
                                                     </a>
 
-                                                <?php elseif ($row['status'] == 'Menunggu Verifikasi') : ?>
-                                                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalBukti<?= $row['id_sewa'] ?>">
+                                                <?php elseif (
+                                                    $row["status"] ==
+                                                    "Menunggu Verifikasi"
+                                                ): ?>
+                                                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalBukti<?= $row[
+                                                        "id_sewa"
+                                                    ] ?>">
                                                         <i class="fas fa-eye"></i> Cek Bukti
                                                     </button>
-                                                    <a href="../proses/proses_status.php?id=<?= $row['id_sewa'] ?>&aksi=lunas" class="btn btn-primary btn-sm" onclick="return confirm('Pastikan uang sudah masuk! Konfirmasi lunas?')">
+                                                    <a href="../proses/proses_status.php?id=<?= $row[
+                                                        "id_sewa"
+                                                    ] ?>&aksi=lunas" class="btn btn-primary btn-sm" onclick="return confirm('Pastikan uang sudah masuk! Konfirmasi lunas?')">
                                                         <i class="fas fa-dollar-sign"></i> Sahkan
                                                     </a>
 
-                                                <?php else : ?>
+                                                <?php else: ?>
                                                     <span class="text-muted small"><i class="fas fa-check-circle"></i> Selesai</span>
                                                 <?php endif; ?>
                                             </td>
                                         </tr>
 
-                                        <div class="modal fade" id="modalBukti<?= $row['id_sewa'] ?>" tabindex="-1" role="dialog" aria-hidden="true">
+                                        <div class="modal fade" id="modalBukti<?= $row[
+                                            "id_sewa"
+                                        ] ?>" tabindex="-1" role="dialog" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title">Bukti Transfer: <?= $row['nama_lengkap'] ?></h5>
+                                                        <h5 class="modal-title">Bukti Transfer: <?= $row[
+                                                            "nama_lengkap"
+                                                        ] ?></h5>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
                                                     <div class="modal-body text-center">
-                                                        <?php if (!empty($row['bukti_bayar'])): ?>
-                                                            <img src="../images/bukti/<?= $row['bukti_bayar'] ?>" class="img-fluid mb-3" alt="Bukti Transfer">
-                                                            <a href="../images/bukti/<?= $row['bukti_bayar'] ?>" target="_blank" class="btn btn-secondary btn-sm">Buka Gambar Penuh</a>
+                                                        <?php if (
+                                                            !empty(
+                                                                $row[
+                                                                    "bukti_bayar"
+                                                                ]
+                                                            )
+                                                        ): ?>
+                                                            <img src="../images/bukti/<?= $row[
+                                                                "bukti_bayar"
+                                                            ] ?>" class="img-fluid mb-3" alt="Bukti Transfer">
+                                                            <a href="../images/bukti/<?= $row[
+                                                                "bukti_bayar"
+                                                            ] ?>" target="_blank" class="btn btn-secondary btn-sm">Buka Gambar Penuh</a>
                                                         <?php else: ?>
                                                             <p class="text-danger">File bukti pembayaran tidak ditemukan.</p>
                                                         <?php endif; ?>
@@ -213,7 +260,8 @@ include '../proses/koneksi.php';
                                                 </div>
                                             </div>
                                         </div>
-                                        <?php endwhile; ?>
+                                        <?php endwhile;
+                                        ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -236,13 +284,13 @@ include '../proses/koneksi.php';
                         <div class="modal-body">Pilih "Logout" di bawah jika kamu ingin mengakhiri sesi ini.</div>
                         <div class="modal-footer">
                             <button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
-                                                                    
+
                             <a class="btn btn-primary" href="../proses/logout.php">Logout</a>
                         </div>
                     </div>
                 </div>
             </div>
-            
+
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
