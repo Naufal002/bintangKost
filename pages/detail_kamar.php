@@ -222,5 +222,4 @@ if (!$kamar) {
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
-</html> 
-<!-- cek cek 1 2 3 4 5 6 7 8 9 10 -->
+</html>
