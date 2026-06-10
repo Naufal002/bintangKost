@@ -201,8 +201,8 @@ if (!$kamar) {
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
   const swiper = new Swiper(".swiper", {
-    slidesPerView: 3,
-    spaceBetween: 20,
+    slidesPerView: 4,
+    spaceBetween: 21,
     loop: true,
     navigation: {
       nextEl: ".swiper-button-next",
@@ -224,5 +224,3 @@ if (!$kamar) {
 </body>  
 </html>
 
-
-<!-- shdhakjshdkjadh -->
